@@ -73,9 +73,32 @@
                 </div>
                 {{-- End Date To --}}
 
+                {{-- Start Sort --}}
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="sort">Sort By</label>
+                        <select name="sort" id="sort" class="form-control">
+                            <option value="">Sort By</option>
+                            <option value="name"  @selected(request()->sort == 'name')>Hotel Name</option>
+                            <option value="city"  @selected(request()->sort == 'city')>Destination</option>
+                            <option value="price" @selected(request()->sort == 'price')>Price</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="sortType"></label>
+                        <select name="sortType" id="sortType" class="form-control">
+                            <option value="ASC"  @selected(request()->sortType != 'DESC') >Asc</option>
+                            <option value="DESC" @selected(request()->sortType == 'DESC') >DESC</option>
+                        </select>
+                    </div>
+                </div>
+                {{-- End Sort --}}
+
                 {{-- Submit --}}
-                <div class="col-md-3 d-flex justify-content-center align-items-center">
-                    <button class="btn btn-primary w-50 mt-4" type="submit">
+                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                    <button class="btn btn-primary w-75 mt-4" type="submit">
                         Search
                     </button>
                 </div>

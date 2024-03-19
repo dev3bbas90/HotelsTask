@@ -14,12 +14,12 @@ trait ArrayFunctionsTrait
      *
      * @return array
     */
-    function sort(array $array , $sortKey , $sortType = 'asc') : array {
+    function sort(array $array , $sortKey , $sortType = 'ASC') : array {
         if(!$sortKey){ return $array;}
 
         usort($array, function ($a, $b) use($sortType , $sortKey) {
-            $first_compared_item  = $sortType == 'desc' ? $b : $a;
-            $second_compared_item = $sortType == 'desc' ? $a : $b;
+            $first_compared_item  = $sortType == 'DESC' ? $b : $a;
+            $second_compared_item = $sortType == 'DESC' ? $a : $b;
             if($sortKey == 'price'){
                 return $first_compared_item[$sortKey] > $second_compared_item[$sortKey] ;
             }else{
