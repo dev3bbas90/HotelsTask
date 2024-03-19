@@ -16,7 +16,7 @@
                 <h2>Hotels Data</h2>
             </div>
         </div>
-        <form action="" method="get">
+        <form action="{{ url('/hotels') }}" method="get">
             <div class="row">
 
                 {{-- Start Name Input --}}
@@ -41,7 +41,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="minPrice">Min Price</label>
-                        <input type="number" step="1" name="minPrice" id="minPrice" value="{{ request()->minPrice }}" class="form-control">
+                        <input type="number" step="0.1" name="minPrice" id="minPrice" value="{{ request()->minPrice }}" class="form-control">
                     </div>
                 </div>
                 {{-- End Min Price --}}
@@ -50,7 +50,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="maxPrice">Max Price</label>
-                        <input type="number" step="1" name="maxPrice" id="maxPrice" value="{{ request()->maxPrice }}" class="form-control">
+                        <input type="number" step="0.1" name="maxPrice" id="maxPrice" value="{{ request()->maxPrice }}" class="form-control">
                     </div>
                 </div>
                 {{-- End Max Price --}}
