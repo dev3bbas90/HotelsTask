@@ -27,8 +27,8 @@ class HotelsController extends Controller
         $sortTypeQuery    = $request->sortType;
 
         // fetch hotels Data
-        $hotelsJsonResponse      = $this->HotelsService->testHotels();
-        // $hotelsJsonResponse     = $this->HotelsService->fetchData();
+        // $hotelsJsonResponse      = $this->HotelsService->testHotels();
+        $hotelsJsonResponse     = $this->HotelsService->fetchData();
 
         if($hotelsJsonResponse['status'] != 'success'){
             return $hotelsJsonResponse['message'];
