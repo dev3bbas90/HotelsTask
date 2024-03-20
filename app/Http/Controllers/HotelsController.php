@@ -47,20 +47,4 @@ class HotelsController extends Controller
         return view('hotels.index' , compact('hotels'));
     }
 
-    function paganation($display_array, $page , $show_per_page = 10) {
-
-        $page           = intval($page < 1 ? 1 : $page);
-
-        // start position in the $display_array
-        $show_per_page  = intval($show_per_page) ?? 1;
-
-        $start          = ($page - 1) * ($show_per_page);
-
-        $offset         = $show_per_page;
-
-        $outArray       = array_slice($display_array, $start, $offset);
-
-        return $outArray;
-    }
-
 }
