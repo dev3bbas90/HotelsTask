@@ -21,7 +21,7 @@ trait ArrayFunctionsTrait
             if($sortKey == 'price'){
                 return $first_compared_item[$sortKey] > $second_compared_item[$sortKey] ;
             }else{
-                return strcmp($first_compared_item[$sortKey], $second_compared_item[$sortKey]) ;
+                return strcmp(@$first_compared_item[$sortKey], @$second_compared_item[$sortKey]) ;
             }
         });
         return $array;
