@@ -104,43 +104,70 @@
                 </div>
                 {{-- End Submit --}}
             </div>
+
+            <hr>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <table class="table table-striped table-hover">
+                        <thead class="">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>City</th>
+                                <th>Price</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($hotels as $hotel)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $hotel['name'] }}</td>
+                                    <td>{{ $hotel['city'] }}</td>
+                                    <td>{{ $hotel['price'] }}</td>
+                                    <td>
+                                        @foreach (@$hotel['availability'] ?? [] as $available)
+                                            <div>{{ $available['from'] . ' To ' . $available['to'] }}</div>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5"class="text-center" >No Result Matches Your Search</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+            <div class="row mt-3">
+                <div class="col-md-4 offset-md-4 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item"><button name="page" value="{{ (request()->page - 1) ?? 1  }}" class="page-link" href="?page">Previous</button></li>
+                          <li class="page-item"><button name="page" value="{{ 1  }}" class="page-link" >1</button></li>
+                          <li class="page-item"><button name="page" value="{{ 2  }}" class="page-link" >2</button></li>
+                          <li class="page-item"><button name="page" value="{{ 3  }}" class="page-link" >3</button></li>
+                          <li class="page-item"><button name="page" value="{{ (request()->page + 1) ?? 1  }}" class="page-link" >Next</button></li>
+                        </ul>
+                      </nav>
+                </div>
+                <div class="col-md-4 text-right">
+                    <select name="limit" id="limit" class="form-control w-auto">
+                        <option value="">Per Page</option>
+                        <option value="5"  @selected(request()->limit == 5)>5</option>
+                        <option value="10"  @selected(!request()->limit || request()->limit == 10)>10</option>
+                        <option value="20"  @selected(request()->limit == 20)>20</option>
+                        <option value="50"  @selected(request()->limit == 50)>50</option>
+                        <option value="100"  @selected(request()->limit == 100)>100</option>
+                        <option value="1000"  @selected(request()->limit == 1000)>1000</option>
+                    </select>
+                </div>
+            </div>
+
         </form>
 
-        <hr>
-        <div class="row mt-5">
-            <div class="col-12">
-                <table class="table table-striped table-hover">
-                    <thead class="">
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>City</th>
-                            <th>Price</th>
-                            <th>Availability</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($filteredData as $hotel)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $hotel['name'] }}</td>
-                                <td>{{ $hotel['city'] }}</td>
-                                <td>{{ $hotel['price'] }}</td>
-                                <td>
-                                    @foreach (@$hotel['availability'] ?? [] as $available)
-                                        <div>{{ $available['from'] . ' To ' . $available['to'] }}</div>
-                                    @endforeach
-                                </td>
-                            </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5"class="text-center" >No Result Matches Your Search</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </body>
 </html>

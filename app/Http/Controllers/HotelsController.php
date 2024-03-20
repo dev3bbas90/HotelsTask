@@ -27,8 +27,8 @@ class HotelsController extends Controller
         $sortTypeQuery    = $request->sortType;
 
         // fetch hotels Data
-        // $hotelsJsonResponse      = $this->HotelsService->testHotels();
-        $hotelsJsonResponse     = $this->HotelsService->fetchData();
+        $hotelsJsonResponse      = $this->HotelsService->testHotels();
+        // $hotelsJsonResponse     = $this->HotelsService->fetchData();
 
         if($hotelsJsonResponse['status'] != 'success'){
             return $hotelsJsonResponse['message'];
@@ -42,8 +42,25 @@ class HotelsController extends Controller
         // Filter Sorted Hotes data According given parameters
         $filteredData = $this->HotelsService->filterArray($hotels_data_sorted , $request);
 
+        $hotels = $this->paganation($filteredData , $request->page ?? 1 ,$request->limit ?? 10);
         // Return View with Hotels Data
-        return view('hotels.index' , compact('filteredData'));
+        return view('hotels.index' , compact('hotels'));
+    }
+
+    function paganation($display_array, $page , $show_per_page = 10) {
+
+        $page           = intval($page < 1 ? 1 : $page);
+
+        // start position in the $display_array
+        $show_per_page  = intval($show_per_page) ?? 1;
+
+        $start          = ($page - 1) * ($show_per_page);
+
+        $offset         = $show_per_page;
+
+        $outArray       = array_slice($display_array, $start, $offset);
+
+        return $outArray;
     }
 
 }
